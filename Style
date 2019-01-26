@@ -1,0 +1,17 @@
+* {
+	color: #000;
+    background-image: url("deck-cards-18354636.jpg");
+}
+
+
+main {
+
+	margin-left: 10%;
+  font-size: 90px;
+	color: black;
+	text-align: center;
+	margin-top: 80px;
+  font-family: Comic Sans MS;
+
+}
+
