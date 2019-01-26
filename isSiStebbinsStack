@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<title>SiStebbinsStack</title>
+	</head>
+		<body>
+			<main>
+<?php
+
+function isSiStebbinsStack($deck)
+{
+    $cards = explode(" ", $deck);
+    $wrongCardIndex = 1;
+    $expectedPower = null;
+    $expectedSuit = null;
+    for ($i = 0; $i < count($cards); $i++) {
+        $card = $cards[$i];
+        $power = getPower($card);
+        $suit = substr($card, -1);
+
+        if ($i == 0) {
+            $expectedPower = $power;
+            $expectedSuit = $suit;
+        }
+
+        if ($power != $expectedPower || strcmp($suit, $expectedSuit) != 0) {
+            $wrongCardIndex += $i;
+            break;
+        }
+
+        $expectedPower = getNextPower($power);
+        $expectedSuit = getNextSuit($suit);
+    }
+
+    echo $wrongCardIndex;
+}
+
+function getPower($card)
+{
+    $power = substr($card, 0, strlen($card) - 1);
+    switch ($power) {
+        case "A":
+            return 1;
+        case "J":
+            return 11;
+        case "Q":
+            return 12;
+        case "K":
+            return 13;
+        default:
+            return (int)$power;
+    }
+}
+
+function getNextSuit($suit)
+{
+    switch ($suit) {
+        case "C":
+            return "H";
+        case "H":
+            return "S";
+        case "S":
+            return "D";
+        default:
+            return "C";
+    }
+}
+
+function getNextPower($power)
+{
+    switch ($power) {
+        case "11":
+            return 1;
+        case "12":
+            return 2;
+        case "13":
+            return 3;
+        default:
+            return $power + 3;
+    }
+}
+
+isSiStebbinsStack("4S 7D 10C KH 2S 6D 9C QH 3S 5D");
+?>
+</main>
+</body>
+</html>
